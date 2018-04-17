@@ -60,7 +60,7 @@ def scan(requests):
 	distance += abs(local_head - end)
 	local_head = end
 	
-	tmp_c = max_d
+	#tmp_c = max_d
 	while max_d >= 0:
 		if (max_d in tmp_req):
 			distance += abs(local_head - max_d)
@@ -72,7 +72,27 @@ def scan(requests):
 print ('{} {}'.format("SCAN:", scan(requests)))
 
 def look(requests):
-	pass
+	local_head = head
+	distance = 0
+	tmp_req = copy.copy(requests)
+	
+	max_d = max(tmp_req)
+	
+	for i in range(local_head, max_d+1):
+		if (i in tmp_req):
+			distance += abs(local_head - i)
+			local_head = i
+			tmp_req.remove(i)
+
+	while max_d >= 0:
+		if (max_d in tmp_req):
+			distance += abs(local_head - max_d)
+			local_head = max_d
+			tmp_req.remove(max_d)
+		max_d -= 1
+	return distance	
+
+print ('{} {}'.format("LOOK:", look(requests)))
 
 def cscan(requests):
 	local_head = head
@@ -100,6 +120,24 @@ def cscan(requests):
 print ('{} {}'.format("C-SCAN:", cscan(requests)))	
 
 def clook(requests):
-	pass
-
+	local_head = head
+	distance = 0
+	tmp_req = copy.copy(requests)
+	
+	max_d = max(tmp_req)
+	
+	for i in range(local_head, max_d+1):
+		if (i in tmp_req):
+			distance += abs(local_head - i)
+			local_head = i
+			tmp_req.remove(i)
+	
+	local_head = min(tmp_req)
+	for i in range(0, max_d+1):
+		if (i in tmp_req):
+			distance += abs(local_head - i)
+			local_head = i
+			tmp_req.remove(i)
+	return distance
+print ('{} {}'.format("C-LOOK:", clook(requests)))
 
