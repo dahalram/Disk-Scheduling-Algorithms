@@ -148,7 +148,9 @@ def cscan(requests):
 
 	move = abs(local_head - end)
 	moves.append(move)
+	moves.append(end)
 	distance += move
+	distance += end
 	local_head = 0
 	
 	for i in range(0, max_d+1):
@@ -181,7 +183,9 @@ def clook(requests):
 			distance += move
 			local_head = i
 			tmp_req.remove(i)
-	
+	next = max_d - 356
+	moves.append(next)
+	distance += next
 	local_head = min(tmp_req)
 	for i in range(0, max_d+1):
 		if (i in tmp_req):
