@@ -75,7 +75,29 @@ def look(requests):
 	pass
 
 def cscan(requests):
-	pass
+	local_head = head
+	distance = 0
+	tmp_req = copy.copy(requests)
+	
+	max_d = max(tmp_req)
+	end = 4999
+	
+	for i in range(local_head, max_d+1):
+		if (i in tmp_req):
+			distance += abs(local_head - i)
+			local_head = i
+			tmp_req.remove(i)
+
+	distance += abs(local_head - end)
+	local_head = 0
+	
+	for i in range(0, max_d+1):
+		if (i in tmp_req):
+			distance += abs(local_head - i)
+			local_head = i
+			tmp_req.remove(i)
+	return distance
+print ('{} {}'.format("C-SCAN:", cscan(requests)))	
 
 def clook(requests):
 	pass
